@@ -236,3 +236,211 @@ print(x.shape)
 x = np.expand_dims(x, axis = 1)
 print(x.shape)
 """
+import pandas as pd
+"""
+#first column is index
+#second column value
+x=pd.Series([10,88,3,4,5])
+print(x)
+seri = pd.Series([10,88,3,4,5])
+type(seri)
+#The index structure of the series is accessed.
+print(seri.axes)
+print(seri.ndim)
+print(seri.dtype)
+print(seri.size)
+print(seri.values)
+
+#return the first 5 row
+print(seri.head())
+print(seri.head(3))
+
+#return the last 5 row
+print(seri.tail(3))
+
+seri1 = pd.Series([99,23,76,2323,98], index = [1,3,5,7,9])
+print(seri1)
+seri2 = pd.Series([99,23,76,2323,98], index = ["a","b","c","d","e"])
+print(seri2)
+print(seri2["a"])
+"""
+"""
+#Create a dictinary
+dic1 = {"reg":10, "log":11,"cart":12}
+series = pd.Series(dic1)
+print(series)
+#concatenation
+pd.concat([series,series])
+"""
+"""
+import numpy as np
+a = np.array([1,2,33,444,75], dtype = "int64")
+seri = pd.Series(a)
+print(seri)
+print(seri[0])
+#slicing
+print(seri[0:3])
+seri = pd.Series([121,200,150,99], index = ["reg","loj","cart","rf"])
+print(seri)
+#this method just uses to access indexes.
+print(seri.index)
+#this method just uses to access keys.
+print(seri.keys)
+#it can be used like dictionary method.
+print(list(seri.items()))
+print(seri.values)
+print("reg" in seri)
+print("a" in seri)
+print(seri["reg"])
+#fancy
+print(seri[["rf","reg"]])
+print(seri["reg":"loj"])
+"""
+#Creating DataFrame
+
+#NumPy cannot keep categorical and numeric data together. That's why we need a Pandas.
+"""
+import pandas as pd
+l = [1,2,23,345,7,8,3]
+print(l)
+print(pd.DataFrame(l,columns = ["degisken_isimleri"]))
+"""
+"""
+import numpy as np
+m = np.arange(1,10).reshape((3,3))
+print(m)
+print(pd.DataFrame(m, columns=["var1","var2","var3"]))
+"""
+"""
+#dataframe renaming
+df =pd.DataFrame(m, columns=["var1","var2","var3"])
+df.head()
+print(df.columns)
+df.columns = ["deg1","deg2","deg3"]
+print(df)
+print(df.index)
+print(df)
+print(df.describe())
+print(df.T)
+print(type(df))
+print(df.axes)
+print(df.shape())
+print(df.shape)
+print(df.ndim)
+print(df.size)
+print(df.value)
+print(type(df.values))
+print(df.head)
+print(df.tail(1))
+"""
+"""
+a = np.array([1,2,3,4,5])
+print(pd.DataFrame(a, columns =["deg1"]))
+
+import numpy as np
+s1 = np.random.randint(10,size = 5)
+s2 = np.random.randint(10,size = 5)
+s3 = np.random.randint(10,size = 5)
+dic1 = {"var1":s1, "var2":s2, "var3":s3}
+print(dic1)
+df = pd.DataFrame(dic1)
+print(df)
+print(df[0:1])
+print(df[0:2])
+df.index = ["a","b","c","d","e"]
+print(df)
+print(df["c":"e"])
+print(df.drop("a", axis = 0))
+print("***********************************")
+#inplace = If we make it true, the drop will be done permanently.
+print(df.drop("a", axis = 0, inplace = True))
+#fancy
+l = {"c","e"}
+print(df.drop(l, axis = 0))
+print("var1" in df)
+l = ["var1","var4","var2"]
+for i in l:
+    print(i in df)
+
+l = ["var1","var2"]
+print(df.drop(l, axis = 1))
+
+"""
+"""
+#Ioc & iloc
+
+import numpy as np
+import pandas as pd
+m = np.random.randint(1,30, size = (10,3))
+df = pd.DataFrame(m, columns=["var1","var2","var3"])
+print(df)
+
+print(df.loc[0:3])
+print(df.iloc[0:3])
+print(df.iloc[0,0])
+print(df.iloc[:3,:2])
+print(df.loc[0:3,"var3"])
+print(df.iloc[0:3]["var3"])
+print(df[0:2])
+print(df.iloc[0:2])
+print(df.loc[0:2])
+print(df.iloc[:,:2])
+print(df.iloc[:,0])
+print(df.loc[0:3,"var3"])
+print(df.iloc[0:3]["var3"])
+
+#Conditional Operations
+print(df[0:2][["var1","var2"]])
+print(df.var1 > 15)
+print(df[(df.var1 >10) & (df.var3 < 8)])
+print(df.loc[(df.var1 >10),["var1","var2"]])
+print(df[(df.var1 >10)][["var1","var2"]])
+"""
+"""
+#Join
+
+import numpy as np
+import pandas as pd
+m = np.random.randint(1,30, size = (10,3))
+df1 = pd.DataFrame(m, columns=["var1","var2","var3"])
+print(df1)
+df2 = df1 + 99
+print(df2)
+print(pd.concat([df1,df2]))
+print(pd.concat([df1,df2], ignore_index=True))
+print(df1.columns)
+df2.columns = ["var1","var2","deg3"]
+print(df2)
+print(df1)
+print(pd.concat([df1,df2], join="inner", ignore_index=True))
+print(df1.columns)
+print(df2.columns)
+"""
+
+"""
+#Concatenation
+
+import pandas as pd
+df1 = pd.DataFrame({'Worker':['John','Doe','Mehmet','Jeff'],
+'Positions':['HR','Engineering','AI','Accounting']
+})
+print(df1)
+df2 = pd.DataFrame({'Worker':['John','Doe','Mehmet','Jeff'],
+'Date_Of_starting_work':[2012,'2018','2015','2017']
+})
+print(df2)
+print(pd.merge(df1,df2))
+#many to one
+df3 = pd.merge(df1,df2, on = "Worker")
+print(df3)
+df4 = pd.DataFrame({'Positions':['Accounting',"Engineering",'HR'],'Mudur': ['Caner','Mustafa','Berkcan']})
+print(pd.merge(df3,df4))
+print(pd.merge(df3,df4))
+"""
+"""
+#many to many
+df5 = pd.DataFrame({'Positions':['Accounting','Accounting',"Engineering","Engineering",'HR','HR'],'Ability': ['Math','Excel','Coding','Linux','Excel','Manage']
+})
+print(df5)
+print(pd.merge(df1,df5))
+"""
